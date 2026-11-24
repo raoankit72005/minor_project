@@ -14,6 +14,10 @@ A beginner-friendly PyTorch project comparing **Gaussian VAE, Poisson VAE, and N
 | 4. Evaluate | Held-out negative log likelihood, reconstruction metrics, zero fractions, mean/variance plots, UMAP, and optional multiple seeds and latent dimensions. |
 | 5. Report | Save plots, JSON metrics and a Markdown experiment summary for your research write-up. |
 
+## Complete Colab notebook (recommended)
+
+Open **[Single_Cell_VAE_All_Phases.ipynb](Single_Cell_VAE_All_Phases.ipynb)** in GitHub and click **Open in Colab** (or upload it to Colab). Run its cells in order. It contains plain, explained code for all five phases without needing to invoke the CLI.
+
 ## Run on Google Colab
 
 Open a Colab notebook (CPU or GPU), then run:
