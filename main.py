@@ -233,6 +233,19 @@ def plot_embedding(z, filename, title):
     plt.close(fig)
 
 
+def plot_umap(z, filename, title):
+    try:
+        import umap
+    except ImportError:
+        return
+    coords = umap.UMAP(n_neighbors=15, min_dist=0.3, random_state=42).fit_transform(z)
+    fig, ax = plt.subplots()
+    ax.scatter(coords[:, 0], coords[:, 1], s=8, alpha=0.7)
+    ax.set(title=title, xlabel="UMAP 1", ylabel="UMAP 2")
+    fig.savefig(filename, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+
+
 def diagnostics(kind, latent_dim, seed):
     data = load_data()
     run = OUT / f"{kind}_z{latent_dim}_seed{seed}"
@@ -250,6 +263,7 @@ def diagnostics(kind, latent_dim, seed):
             prediction = torch.softmax(prediction, dim=1) * library[:, None]
         prediction = prediction.cpu().numpy()
     plot_embedding(z.cpu().numpy(), run / "latent_pca.png", kind + " latent PCA")
+    plot_umap(z.cpu().numpy(), run / "latent_umap.png", kind + " latent UMAP")
     if kind == "gaussian":
         return
     selected = np.argsort(x.mean(axis=0))[-30:]
